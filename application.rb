@@ -2,7 +2,6 @@
   require 'sinatra'
   require 'data_mapper'
   require 'json'
-  require "awesome_print"
 
   DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite:./db/books.db')
 
