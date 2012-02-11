@@ -22,18 +22,7 @@
 
 
   end
-=begin
-  class User
-    include DataMapper::Resource
 
-    property :id,           Serial
-    property :email,        String
-    property :password,     String
-
-    has n, :books
-
-  end
-=end
   DataMapper.finalize
 
   get '/' do
@@ -47,12 +36,7 @@
 
   post '/books' do
     data = JSON.parse(request.body.gets)
-    Book.create(:title => data['title']);
-=begin
-  The input stream is an IO-like object which contains the raw HTTP POST data. When applicable, its external encoding must be “ASCII-8BIT” and it must be opened in binary mode, for Ruby 1.9 compatibility. The input stream must respond to gets, each, read and rewind.
-gets must be called without arguments and return a string, or nil on EOF.
-=end
-  
+    Book.create(:title => data['title']);  
   end
 
   put '/books/:id' do
