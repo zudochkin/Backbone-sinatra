@@ -1,0 +1,56 @@
+.book-container input, .book-container select {
+	display: none;
+}
+
+a.book-save {
+	width: 80%;
+	margin: 0 auto;
+	display: none;
+}
+
+div.editing span {
+	display: none;
+	/*border: 1px solid red;*/
+}
+
+div.editing input, div.editing select {
+	display: block;
+}
+
+div.editing a.book-save {
+	display: block;
+}
+
+.book {
+	width: 230px;
+	height: 400px;
+	float: left;
+	margin: 3px;
+	box-shadow: 3px 3px 10px #000;
+	padding: 3px;
+}
+
+.book dl {
+	background-color: #111;
+	opacity: 0.8;
+	-moz-opacity: 0.8;
+	filter:alpha(opacity=8);
+	height: 80%;
+	border-radius: 5px;
+	padding: 1px;
+	color: white;
+
+}
+
+.book select {
+	width: 210px;
+}
+
+#book-control {
+	/*border: 1px solid red;*/
+}
+
+i.icon-remove {
+	cursor: pointer;
+}
+
