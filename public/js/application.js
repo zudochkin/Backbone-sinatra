@@ -18,7 +18,7 @@ $(function() {
 		model: Book,
 	});
 
-	var library = new Library({});
+	var library = new Library();
 	
 	var BookView = Backbone.View.extend({
 		tagName: 'div',

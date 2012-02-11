@@ -18,8 +18,22 @@
     property :isbn,         String
     property :status,       String
 
-  end
+    #belongs_to :user
 
+
+  end
+=begin
+  class User
+    include DataMapper::Resource
+
+    property :id,           Serial
+    property :email,        String
+    property :password,     String
+
+    has n, :books
+
+  end
+=end
   DataMapper.finalize
 
   get '/' do
