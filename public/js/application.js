@@ -7,7 +7,7 @@ $(function() {
 			genre: ["horror", "comedy"],
 			isbn: "0128127622",
 			status: "not read",
-			image: "images/placeholder.png",
+			image: "/images/placeholder.png",
 			date: ''
 		},
 	});
@@ -29,7 +29,7 @@ $(function() {
 		events: {
 			"click a.book-edit": "edit",
 			"keypress input": "update",
-			"click .book-delete": "remove",
+			"click .book-delete": "clear",
 			"click .book-save": "close",
 		},
 
@@ -100,15 +100,17 @@ $(function() {
 			return false;
 		},
 
-		remove: function() {
+		clear: function() {
 			if (confirm("Вы уверены?")) {
-				$(this.el).remove();
-				//this.model.destroy();
+				//$(this.el).remove();
+				this.model.destroy();
 			}
 		},
 
-		clear: function() {
-			this.model.destroy();
+		remove: function() {
+			//this.model.destroy();
+			$(this.el).fadeOut('slow', function() {$(this).remove()});
+			console.log('clear');
 		}
 				
 	});
@@ -138,7 +140,10 @@ $(function() {
 
 		addOne: function(book) {
 			var view = new BookView({model: book});
-			$('#books').find('.book-container').append(view.render().el);
+			var content = view.render().el;
+			$(content).hide();
+			$('#books').find('.book-container').prepend(content);
+			$(content).show(1000);
 		},
 
 		addAll: function() {

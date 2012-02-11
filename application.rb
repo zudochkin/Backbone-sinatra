@@ -29,20 +29,35 @@
 
   get '/books' do
     content_type :json
-    {:models => Book.all}.to_json
+    Book.all(:order => :id).to_json
   end
 
   post '/books' do
-    content_type :json
-    
+    data = JSON.parse(request.body.gets)
+    Book.create(:title => data['title']);
+=begin
+  The input stream is an IO-like object which contains the raw HTTP POST data. When applicable, its external encoding must be “ASCII-8BIT” and it must be opened in binary mode, for Ruby 1.9 compatibility. The input stream must respond to gets, each, read and rewind.
+gets must be called without arguments and return a string, or nil on EOF.
+=end
+  
   end
 
-  post '/book' do
-      #content_type :json
+  put '/books/:id' do
+    data = JSON.parse(request.body.gets)
+    book = Book.get(params[:id])
+    result = book.update(
+      :title => data['title'],
+      :year => data['year'],
+      :author => data['author'],
+      :genre => data['genre'],
+      :isbn => data['isbn'],
+      :status => data['status'],
+      :image => '/images/placeholder.png', #data['image'],
+      :date => Time.now
+    )
+    "false" unless result
+  end
 
-      raw = request.env["rack.input"].read
-      a = JSON.parse raw
-
-      #{:a => a }.to_json
-      ap a
+  delete '/books/:id' do
+    Book.get(params[:id]).destroy
   end
