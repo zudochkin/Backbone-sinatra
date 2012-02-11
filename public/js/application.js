@@ -50,7 +50,6 @@ $(function() {
 		},
 
 		render: function() {
-			console.log("book view render");
 			$(this.el).html(this.template(this.model.toJSON()));
 			$(this.el).css({'background': ' no-repeat url(' + this.model.get('image') + ')'});
 			this.setText();
@@ -67,7 +66,6 @@ $(function() {
 			this.inputIsbn = this.$('input.book-isbn');
 			this.inputStatus = this.$('select.book-status');
 			this.inputDate = this.$('input.book-date');
-			//this.input.bind('blur', _.bind(this.close, this)).val(text);
 		},
 		_fillForm: function() {
 			var data = this.model.toJSON();
@@ -102,22 +100,18 @@ $(function() {
 
 		clear: function() {
 			if (confirm("Вы уверены?")) {
-				//$(this.el).remove();
 				this.model.destroy();
 			}
 		},
 
 		remove: function() {
-			//this.model.destroy();
 			$(this.el).fadeOut('slow', function() {$(this).remove()});
-			console.log('clear');
 		}
 				
 	});
 
 	var AppView = Backbone.View.extend({
 		el: $('#books'),
-	//id: 'books',
 		
 		events: {
 			"click button": "create",
@@ -129,13 +123,10 @@ $(function() {
 			library.bind('add', this.addOne, this);
 			library.bind('reset', this.addAll, this);
 			library.bind('all', this.render, this);
-			console.log('library fetch');
-			//console.log(library.fetch());
 			library.fetch();
 		},
 
 		render: function() {
-			console.log('app render');
 		},
 
 		addOne: function(book) {
@@ -164,12 +155,9 @@ $(function() {
 		}
 	});
 
+	$('.book-date').datepicker({});
 	var appView = new AppView();
 
-	//library.create([{}, {}, {}]);
-
-
-	$('.book .book-date').datepicker({});
 
 	//console.log(Store.findAll());
 });
